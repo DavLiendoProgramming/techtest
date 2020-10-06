@@ -1,0 +1,77 @@
+#wrapper {
+  display: flex;
+}
+
+.content {
+  width: 73%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.content-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 27%;
+  height: 100vh;
+  background-color: #f7f7f7;
+  justify-content: start;
+}
+.sidebar__item {
+  background-color: #e2c4c4;
+  display: block;
+  margin: 10px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+.sidebar__item:hover {
+  background-color: #e8dddd;
+}
+
+.jobs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 20px;
+  justify-content: center;
+  color: white;
+}
+.jobs__card {
+  text-align: center;
+  background-color: #c9adad;
+  max-height: 480px;
+  max-width: 220px;
+  border-radius: 3px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  align-content: center;
+}
+.jobs__card-company {
+  margin: 5px;
+}
+.jobs__card-image {
+  max-width: 90%;
+  max-height: 60%;
+}
+.jobs__card-position {
+}
+
+#hello {
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+}
