@@ -13,6 +13,9 @@ export const Sidebar = () => {
         <Link className="sidebar__item" to="/about">
           About
         </Link>
+        <Link className="sidebar__item" to="/table">
+          React-Table
+        </Link>
       </div>
     </Fragment>
   );

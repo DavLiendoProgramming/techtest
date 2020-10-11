@@ -1,43 +1,51 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import axios from 'axios';
-import PeopleAction from './PeopleAction';
-export const People = () => {
-  const [data, setData] = useState();
+import React, { useState, Fragment, useCallback } from 'react';
+import PeopleModal from './PeopleModal';
+import Loader from '../Loader';
+import { useEffect } from 'react';
+const People = ({ users, loadUsers }) => {
+  //Toggling the modal
+  const useToggle = (initial) => {
+    const [open, setOpen] = useState(initial);
+    return [open, useCallback(() => setOpen((status) => !status))];
+  };
+  const [open, toggle] = useToggle(false);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios(
-        'https://5f3f012c13a9640016a69302.mockapi.io/users'
-      );
-      setData({ data: response.data });
-    };
-    fetchData();
-  }, []);
-  return data === undefined || data === {} ? (
-    <Fragment>
-      <h1>Waiting for data</h1>
-    </Fragment>
+    if (typeof users[0] === 'undefined') {
+      loadUsers();
+    }
+  }, [users, loadUsers]);
+
+  return typeof users[0] === 'undefined' ? (
+    <Loader />
   ) : (
     <Fragment>
       <div className="content-wrap">
-        <table id="table">
-          <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>Actions</th>
-          </tr>
-          <tr>
-            {data.data.map((user) => (
-              <tr>
+        <table className="table">
+          <thead className="table-head">
+            <tr className="table-row">
+              <th>Name</th>
+              <th>Company</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr className="table-row" key={user.name}>
                 <td>{user.name}</td>
                 <td>{user.country}</td>
                 <td>
-                  <PeopleAction user={user} />
+                  <span className="table-toggler" onClick={() => toggle()}>
+                    View
+                  </span>
+                  <PeopleModal toggle={toggle} open={open} user={user} />
                 </td>
               </tr>
             ))}
-          </tr>
+          </tbody>
         </table>
       </div>
     </Fragment>
   );
 };
+export default People;

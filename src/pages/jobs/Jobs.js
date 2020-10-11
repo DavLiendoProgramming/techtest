@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-
+import Loader from '../Loader';
 export const Jobs = () => {
   const [data, setData] = useState();
   useEffect(() => {
@@ -13,9 +13,7 @@ export const Jobs = () => {
     fetchData();
   }, []);
   return data === undefined || data === {} ? (
-    <Fragment>
-      <h1>Waiting for data</h1>
-    </Fragment>
+    <Loader />
   ) : (
     <Fragment>
       <div className="content-wrap">
